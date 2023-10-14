@@ -4,8 +4,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 class CryptoAPI {
-
-    //burada key yazılan yere API KEY veriyoruz.
+    
     @GET("prices")
     suspend fun getCryptoList(
         @Query("key") key : String
