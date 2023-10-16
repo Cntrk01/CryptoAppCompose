@@ -127,7 +127,7 @@ fun CryptoRow(navController: NavController, crypto: CryptoListItem) {
             style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.padding(2.dp),
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.secondary
+            color = Color.White
         )
 
         Text(
@@ -166,7 +166,6 @@ fun CryptoList(navController: NavController, viewModel: CryptoListViewModel = hi
         }
     }
 }
-
 @Composable
 fun RetryView(
     error: String,
