@@ -14,8 +14,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -34,7 +36,7 @@ import com.compose.cryptoappcompose.util.Resource
 import com.compose.cryptoappcompose.viewmodel.CryptoDetailViewModel
 import kotlinx.coroutines.launch
 
-@SuppressLint("CoroutineCreationDuringComposition")
+//@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun CryptoDetailScreen(
     id:String,
@@ -43,15 +45,26 @@ fun CryptoDetailScreen(
     viewModel:CryptoDetailViewModel = hiltViewModel()){
 
 
-    val scope = rememberCoroutineScope()
+//    val scope = rememberCoroutineScope()
+//
+//    var cryptoItem by remember { mutableStateOf<Resource<Crypto>>(Resource.Loading())}
+//
+//    //bu fonk. sürekli istek atılıyor.Biz remember kullanıyoruz böyle olmaması için fakat sürekli istek atıyor CryptoDetailScreen fonksiyonu sürekli çağırılmasına sebeb oluo
+//    scope.launch {
+//        cryptoItem = viewModel.getCrypto(id)
+//        println(cryptoItem.data)
+//    }
+    //Adamlar bunun yerine LaunchedEffect kullanın demişler.Bu yukarıdakine göre daha iyi
+//    var cryptoItem by remember { mutableStateOf<Resource<Crypto>>(Resource.Loading())}
+//    LaunchedEffect(key1 = Unit, block ={
+//        cryptoItem = viewModel.getCrypto(id)
+//    } )
 
-    var cryptoItem by remember { mutableStateOf<Resource<Crypto>>(Resource.Loading())}
-
-    scope.launch {
-        cryptoItem = viewModel.getCrypto(id)
-        println(cryptoItem.data)
-    }
-
+    //buda son yöntem en iyisi tekk satırda yapılıyor daha performanslı
+    val cryptoItem by produceState<Resource<Crypto>>(initialValue = Resource.Loading()){
+        value=viewModel.getCrypto(id)
+    } // yada by silip bunun sonuna .value yazabiliriz
+    //!!!!!!!! sadece 1 tane detail endpoint eklediğim için sadece btc geliyor .
     Box(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colorScheme.primary),
@@ -64,10 +77,10 @@ fun CryptoDetailScreen(
                     val selectedCrypto = cryptoItem.data!![0]
                     Text(
                         text = selectedCrypto.name,
-                        style = MaterialTheme.typography.headlineMedium,
+                        style = MaterialTheme.typography.headlineLarge,
                         modifier = Modifier.padding(2.dp),
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.primaryContainer,
                         textAlign = TextAlign.Center
                     )
 
@@ -98,9 +111,7 @@ fun CryptoDetailScreen(
                 is Resource.Loading -> {
                     CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                 }
-
             }
-
         }
     }
 }
