@@ -42,16 +42,15 @@ fun CryptoDetailScreen(
     navController: NavController,
     viewModel:CryptoDetailViewModel = hiltViewModel()){
 
-    //bu yöntem internetten veri çektiğimizde sağlıklı çalışmıyor sürekli null geliyor data gelip gidiyor
+
     val scope = rememberCoroutineScope()
-    //statefull
+
     var cryptoItem by remember { mutableStateOf<Resource<Crypto>>(Resource.Loading())}
 
     scope.launch {
         cryptoItem = viewModel.getCrypto(id)
         println(cryptoItem.data)
     }
-
 
     Box(modifier = Modifier
         .fillMaxSize()
