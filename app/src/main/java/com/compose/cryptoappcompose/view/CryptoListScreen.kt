@@ -44,7 +44,6 @@ fun CryptoListScreen(
     navController: NavController,
     viewModel: CryptoListViewModel = hiltViewModel()
 ) {
-
     Surface(
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.fillMaxSize(),
@@ -72,7 +71,7 @@ fun CryptoListScreen(
             }
             Spacer(modifier = Modifier.height(10.dp))
             //List
-            CryptoList(navController = navController) //viewmodeli vermedk hilt inject ediyor.
+            CryptoList(navController = navController)
         }
     }
 }
@@ -114,7 +113,6 @@ fun SearchBar(
         }
     }
 }
-//buda bizim satır tasarımımız.
 @Composable
 fun CryptoRow(navController: NavController, crypto: CryptoListItem) {
     Column(modifier = Modifier
@@ -122,7 +120,6 @@ fun CryptoRow(navController: NavController, crypto: CryptoListItem) {
         .padding(20.dp)
         .background(MaterialTheme.colorScheme.primary)
         .clickable {
-            //tıklandıgı zaman detaya gidiceği için detay sayfaaasına yazıdıgımız navigation kodunu verdik ve tıklanınca currency vs veriyor
             navController.navigate("crypto_detail_string/${crypto.currency}/${crypto.price}")
         }) {
         Text(
@@ -142,7 +139,6 @@ fun CryptoRow(navController: NavController, crypto: CryptoListItem) {
         )
     }
 }
-//Verilerimizi göstereceğimiz fonksiyon bu
 @Composable
 fun CryptoListView(cryptos: List<CryptoListItem>, navController: NavController) {
     LazyColumn(contentPadding = PaddingValues(5.dp)) {
@@ -151,7 +147,6 @@ fun CryptoListView(cryptos: List<CryptoListItem>, navController: NavController) 
         }
     }
 }
-//Burada ayrı yazma sebebimiz viewmodeldeki loading error mesaj durumlarını değerlendirmekti
 @Composable
 fun CryptoList(navController: NavController, viewModel: CryptoListViewModel = hiltViewModel()) {
     val cryptoList by remember { viewModel.cryptoList }
@@ -165,7 +160,6 @@ fun CryptoList(navController: NavController, viewModel: CryptoListViewModel = hi
             CircularProgressIndicator(color = Color.Red)
         }
         if (errorMessage.isNotEmpty()) {
-            //retryView yaptık burda örneğin internet kesildi veriler gelmedi kullancı retry yaparak verileri getirebilicek fonksiyon
             RetryView(error = errorMessage) {
                 viewModel.loadCrypto()
             }
@@ -176,17 +170,16 @@ fun CryptoList(navController: NavController, viewModel: CryptoListViewModel = hi
 @Composable
 fun RetryView(
     error: String,
-    onRetry: () -> Unit
+    onRetrys: () -> Unit
 ) {
     Column {
         Text(text = error, color = Color.Red, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(10.dp))
         Button(
-            onClick = { onRetry },
+            onClick = { onRetrys.invoke() },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text(text = "Retry")
         }
     }
-
 }
