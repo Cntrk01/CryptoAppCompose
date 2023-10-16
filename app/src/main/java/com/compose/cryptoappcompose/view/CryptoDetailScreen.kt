@@ -60,11 +60,9 @@ fun CryptoDetailScreen(
 //        cryptoItem = viewModel.getCrypto(id)
 //    } )
 
-    //buda son yöntem en iyisi tekk satırda yapılıyor daha performanslı
     val cryptoItem by produceState<Resource<Crypto>>(initialValue = Resource.Loading()){
         value=viewModel.getCrypto(id)
-    } // yada by silip bunun sonuna .value yazabiliriz
-    //!!!!!!!! sadece 1 tane detail endpoint eklediğim için sadece btc geliyor .
+    }
     Box(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colorScheme.primary),
