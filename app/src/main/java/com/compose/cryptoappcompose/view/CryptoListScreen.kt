@@ -49,9 +49,9 @@ fun CryptoListScreen(navController: NavController,viewModel: CryptoListViewModel
                 color = MaterialTheme.colorScheme.surface)
 
             Spacer(modifier = Modifier.height(10.dp))
-            //Search
+
             SearchBar(hint = "Search...", modifier = Modifier.fillMaxWidth().padding(16.dp)){
-                //buradaki it searchbar içinde yazılan texti bize veriyor
+
             }
             Spacer(modifier = Modifier.height(10.dp))
             //List
@@ -64,7 +64,6 @@ fun SearchBar(
     hint : String="",
     onSearch : (String)->Unit ={}
 ){
-    //by ekleyerek valueye text verdiğimizde text.value yazmıyoruz.
     var text by remember {
         mutableStateOf("")
     }
@@ -72,11 +71,10 @@ fun SearchBar(
     var isHintDisplayed by remember {
         mutableStateOf(hint!="")
     }
-//Box içine alma sebebimiz hint saçma biryerde gözüküyordu bundan dolayı boxa aldık
     Box(modifier = modifier){
         BasicTextField(value = text, onValueChange = {
             text =it
-            onSearch(it) //yazılan texti buradaki fonksiyona vererek yazılan stringi almasını sağladık.
+            onSearch(it)
         }, maxLines = 1,
             singleLine = true,
             textStyle = TextStyle(color=Color.Black),
@@ -85,8 +83,7 @@ fun SearchBar(
                 .shadow(5.dp, CircleShape) //shadow gölge veriyor
                 .background(Color.White, CircleShape)
                 .padding(horizontal = 20.dp, vertical = 12.dp)
-                .onFocusChanged { //kullanıcı buraya tıklamayı bıraktıktan sonra ne olacak diye
-                    //searchbar boşsa hinti göstermemizi sağlıyor
+                .onFocusChanged { 
                     isHintDisplayed = it.isFocused != true && text.isEmpty()
                 }
         )
