@@ -31,7 +31,7 @@ class CryptoListViewModel @Inject constructor(private val repository:CryptoRepos
         }else{
             initialCryptoList
         }
-        //büyük listeler içerisinde filtreleme alfabetik dizme gibi işlemler içeriyorsa default kullanılır.
+
         viewModelScope.launch (Dispatchers.Default){
             if (query.isEmpty()){
                 cryptoList.value=initialCryptoList
@@ -39,8 +39,6 @@ class CryptoListViewModel @Inject constructor(private val repository:CryptoRepos
                 return@launch
             }
             val result=listToSearch.filter {
-                //equals yazı bittiği an sonuc gösterir örneğin BTC fakat contains BT yazdıgında bütün sonucu listeler
-                //ignorecase büyük küçük farketmez sonuç göstercek
                 it.currency.contains(query.trim(),ignoreCase = true)
             }
             if (isSearchStarting){
