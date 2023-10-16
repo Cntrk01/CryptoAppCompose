@@ -14,7 +14,7 @@ class CryptoRepository @Inject constructor(private val api: CryptoAPI){
 
     suspend fun getCryptoList() : Resource<CryptoList>{
         val response=try {
-            api.getCryptoList(Constants.API_KEY)
+            api.getCryptoList()
         }catch (e:Exception){
             return Resource.Error(e.toString(),null)
         }
@@ -22,7 +22,7 @@ class CryptoRepository @Inject constructor(private val api: CryptoAPI){
     }
     suspend fun getCrypto(id:String) : Resource<Crypto>{
         val response=try {
-            api.getCrypto(Constants.API_KEY,id,Constants.CALL_ATTRIBUTES)
+            api.getCrypto()
         }catch (e:Exception){
             return Resource.Error(e.toString(),null)
         }
