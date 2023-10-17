@@ -1,9 +1,16 @@
 # CryptoAppCompose
 CryptoAppCompose 
 Bu projede 
+
+
 -Retrofit
+
+
 -Hilt
+
+
 -MVVM
+
 
 Kullanarak composda ilk projemi geliştirdim.
 
