@@ -14,6 +14,11 @@ Bu projede
 
 Kullanarak composda ilk projemi geliştirdim.
 
-![Ekran Görüntüsü (173)](https://github.com/Cntrk01/CryptoAppCompose/assets/98031686/44772b55-1b38-468a-ac7f-6fc194846d5c)
-![Ekran Görüntüsü (172)](https://github.com/Cntrk01/CryptoAppCompose/assets/98031686/9e1be57a-b66d-4306-b0a6-deeee33fa9d0)
-![Ekran Görüntüsü (171)](https://github.com/Cntrk01/CryptoAppCompose/assets/98031686/7ae03a08-2fde-41f0-868f-70627bce6386)
+
+
+![Ekran görüntüsü 2023-10-27 141850](https://github.com/Cntrk01/CryptoAppCompose/assets/98031686/9ad47f6e-c36d-4479-bda3-0b6fe2bb1b7f)
+
+
+
+![Ekran görüntüsü 2023-10-27 141837](https://github.com/Cntrk01/CryptoAppCompose/assets/98031686/7fe040c2-d9e5-45a9-a2ca-d1a03b641d4b)
+
